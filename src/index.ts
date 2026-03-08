@@ -369,6 +369,31 @@ export function getNodeAt(head: ListNode | null, steps: number): ListNode | null
   return curr;
 }
 
+/** Get middle node of linked list (fast/slow pointer) */
+export function getMid(head: ListNode | null): ListNode | null {
+  if (head === null) return null;
+  let slow: ListNode | null = head;
+  let fast: ListNode | null = head.next;
+  while (fast !== null && fast.next !== null) {
+    slow = slow!.next;
+    fast = fast.next.next;
+  }
+  return slow;
+}
+
+/** Reverse linked list and return new head */
+export function reverseList(head: ListNode | null): ListNode | null {
+  let prev: ListNode | null = null;
+  let curr: ListNode | null = head;
+  while (curr !== null) {
+    const next = curr.next;
+    curr.next = prev;
+    prev = curr;
+    curr = next;
+  }
+  return prev;
+}
+
 /**
  * Create a 2D grid filled with a value
  * @param rows - Number of rows

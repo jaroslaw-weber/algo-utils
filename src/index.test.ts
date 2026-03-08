@@ -9,6 +9,12 @@ import {
   dirs8,
   createGrid,
   gridToString,
+  ListNode,
+  getListLength,
+  getTail,
+  getNodeAt,
+  getMid,
+  reverseList,
 } from "./index";
 import {
   chunk,
@@ -263,6 +269,99 @@ describe("custom utils", () => {
 
     it("handles empty grid", () => {
       expect(gridToString([])).toBe("");
+    });
+  });
+
+  describe("Linked List", () => {
+    describe("ListNode", () => {
+      it("creates node with value", () => {
+        const node = new ListNode(5);
+        expect(node.val).toBe(5);
+        expect(node.next).toBeNull();
+      });
+
+      it("creates node with next", () => {
+        const next = new ListNode(2);
+        const node = new ListNode(1, next);
+        expect(node.val).toBe(1);
+        expect(node.next).toBe(next);
+      });
+    });
+
+    describe("getListLength", () => {
+      it("returns 0 for empty list", () => {
+        expect(getListLength(null)).toBe(0);
+      });
+
+      it("returns correct length", () => {
+        const head = new ListNode(1, new ListNode(2, new ListNode(3)));
+        expect(getListLength(head)).toBe(3);
+      });
+    });
+
+    describe("getTail", () => {
+      it("returns null for empty list", () => {
+        expect(getTail(null)).toBeNull();
+      });
+
+      it("returns last node", () => {
+        const tail = new ListNode(3);
+        const head = new ListNode(1, new ListNode(2, tail));
+        expect(getTail(head)).toBe(tail);
+      });
+    });
+
+    describe("getNodeAt", () => {
+      it("returns null for empty list", () => {
+        expect(getNodeAt(null, 1)).toBeNull();
+      });
+
+      it("returns node at position", () => {
+        const node2 = new ListNode(2);
+        const head = new ListNode(1, node2);
+        expect(getNodeAt(head, 2)).toBe(node2);
+      });
+    });
+
+    describe("getMid", () => {
+      it("returns null for empty list", () => {
+        expect(getMid(null)).toBeNull();
+      });
+
+      it("returns middle for odd length", () => {
+        // 1 -> 2 -> 3, mid should be 2
+        const mid = new ListNode(2, new ListNode(3));
+        const head = new ListNode(1, mid);
+        expect(getMid(head)).toBe(mid);
+      });
+
+      it("returns first middle for even length", () => {
+        // 1 -> 2 -> 3 -> 4, mid should be 2
+        const node2 = new ListNode(2, new ListNode(3, new ListNode(4)));
+        const head = new ListNode(1, node2);
+        expect(getMid(head)).toBe(node2);
+      });
+    });
+
+    describe("reverseList", () => {
+      it("returns null for empty list", () => {
+        expect(reverseList(null)).toBeNull();
+      });
+
+      it("reverses single node", () => {
+        const head = new ListNode(1);
+        expect(reverseList(head)).toBe(head);
+      });
+
+      it("reverses list and returns new head", () => {
+        // 1 -> 2 -> 3 becomes 3 -> 2 -> 1
+        const head = new ListNode(1, new ListNode(2, new ListNode(3)));
+        const newHead = reverseList(head);
+        expect(newHead!.val).toBe(3);
+        expect(newHead!.next!.val).toBe(2);
+        expect(newHead!.next!.next!.val).toBe(1);
+        expect(newHead!.next!.next!.next).toBeNull();
+      });
     });
   });
 });

@@ -26,6 +26,17 @@ for (const [dr, dc] of dirs4) {
 }
 ```
 
+### Grid Creation & Debugging
+```ts
+// Create a 2D grid for DP problems - much cleaner than Array.from
+const dp = createGrid(m, n, 0);           // m×n grid filled with 0
+const visited = createGrid(rows, cols, false);  // boolean grid
+
+// Debug your grid with pretty printing
+console.log(gridToString(grid));        // " 1  2\n 3  4"
+console.log(gridToString(grid, 4));     // custom cell width: 4
+```
+
 ### Priority Queue (Min-Heap)
 ```ts
 // Just focus on the algorithm, not heap implementation
@@ -178,6 +189,8 @@ getNodeAt(head, 2);  // ListNode { val: 2, next: ... }
 | `swap(arr, i, j)` | Swap elements at indices i and j in place |
 | `peek(stack)` | Get the top element without removing it |
 | `inBounds(grid, r, c)` | Check if coordinates are within grid bounds |
+| `createGrid(rows, cols, val?)` | Create a 2D grid filled with a value (default 0) |
+| `gridToString(grid, width?)` | Convert grid to formatted string for debugging |
 | `getKey(r, c)` | Create a string key from row and column |
 | `charToIdx(c)` | Convert 'A'-'Z' to 0-25 |
 | `idxToChar(i)` | Convert 0-25 to 'A'-'Z' |

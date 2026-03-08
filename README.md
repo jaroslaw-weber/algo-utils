@@ -30,7 +30,9 @@ for (const [dr, dc] of dirs4) {
 ```ts
 // Just focus on the algorithm, not heap implementation
 const heap = new Heap<number>();
-heap.push(5).push(1).push(3);
+heap.push(5);
+heap.push(1);
+heap.push(3);
 heap.pop(); // 1
 ```
 
@@ -40,6 +42,15 @@ heap.pop(); // 1
 const cache = new LRUCache<string, number>(3);
 cache.set("a", 1);
 cache.get("a"); // 1
+```
+
+### DefaultMap
+```ts
+// Like Python's defaultdict - auto-initialize missing keys
+const map = new DefaultMap<string, number[]>(() => []);
+map.get("foo").push(1); // no need to check if "foo" exists
+map.get("foo").push(2);
+map.get("foo"); // [1, 2]
 ```
 
 ### Swapping array elements
@@ -69,7 +80,7 @@ swap(arr, i, j);
 
 ### Mnemonist Re-exports
 
-`Stack`, `Queue`, `Heap`, `MultiMap`, `BitSet`, `BloomFilter`, `MultiSet`, `Trie`, `LRUCache`
+`Stack`, `Queue`, `Heap`, `MultiMap`, `DefaultMap`, `BitSet`, `BloomFilter`, `MultiSet`, `Trie`, `LRUCache`
 
 ## Full Example: Number of Islands
 

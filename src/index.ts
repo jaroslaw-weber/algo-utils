@@ -1,8 +1,7 @@
 import _, { chunk, uniq, uniqBy, flatten, flattenDeep, sortBy, reverse, fill, range, cloneDeep, groupBy, countBy, keyBy, partition, pick, omit, merge, get, set, has, zip, unzip, sum, mean, min, max, random } from "lodash";
-import { Stack, Queue, Heap, MultiMap, BitSet, BloomFilter, MultiSet, Trie, LRUCache } from "mnemonist";
+import { Stack, Queue, Heap, MultiMap, BitSet, BloomFilter, MultiSet, Trie, LRUCache, DefaultMap } from "mnemonist";
 
-export { chunk, uniq, uniqBy, flatten, flattenDeep, sortBy, reverse, fill, range, cloneDeep, groupBy, countBy, keyBy, partition, pick, omit, merge, get, set, has, zip, unzip, sum, mean, min, max, random };
-export { Stack, Queue, Heap, MultiMap, BitSet, BloomFilter, MultiSet, Trie, LRUCache };
+export { Stack, Queue, Heap, MultiMap, BitSet, BloomFilter, MultiSet, Trie, LRUCache, DefaultMap };
 
 export function swap<T>(arr: T[], i: number, j: number): void {
   [arr[i], arr[j]] = [arr[j], arr[i]];

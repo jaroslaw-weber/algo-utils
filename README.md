@@ -53,6 +53,25 @@ map.get("foo").push(2);
 map.get("foo"); // [1, 2]
 ```
 
+### Union Find
+```ts
+// O(α(n)) per operation - nearly constant time
+const uf = new UnionFind(5);
+uf.union(0, 1);
+uf.union(1, 2);
+uf.connected(0, 2); // true
+uf.connected(0, 3); // false
+```
+
+### Adjacency List
+```ts
+// Generic graph representation
+const adj = new AdjacencyList<number>();
+adj.addUndirectedEdge(1, 2);
+adj.addUndirectedEdge(1, 3);
+adj.getNeighbors(1); // [2, 3]
+```
+
 ### Swapping array elements
 ```ts
 // Quick in-place swap without temp variable
@@ -63,8 +82,8 @@ swap(arr, i, j);
 
 ### Custom Utils
 
-| Function | Description |
-|----------|-------------|
+| Function/Class | Description |
+|----------------|-------------|
 | `swap(arr, i, j)` | Swap elements at indices i and j in place |
 | `peek(stack)` | Get the top element without removing it |
 | `inBounds(grid, r, c)` | Check if coordinates are within grid bounds |
@@ -73,6 +92,8 @@ swap(arr, i, j);
 | `idxToChar(i)` | Convert 0-25 to 'A'-'Z' |
 | `dirs4` | 4-directional movement vectors |
 | `dirs8` | 8-directional movement vectors |
+| `UnionFind` | Disjoint set union with path compression and union by rank |
+| `AdjacencyList<T>` | Graph adjacency list with directed/undirected edge support |
 
 ### Lodash Re-exports
 

@@ -72,6 +72,15 @@ adj.addUndirectedEdge(1, 3);
 adj.getNeighbors(1); // [2, 3]
 ```
 
+### Topological Sort
+```ts
+// Kahn's algorithm - returns null if cycle exists
+const adj = new AdjacencyList<string>();
+adj.addEdge("a", "b");
+adj.addEdge("b", "c");
+topologicalSort(adj); // ["a", "b", "c"] or similar
+```
+
 ### Swapping array elements
 ```ts
 // Quick in-place swap without temp variable
@@ -94,6 +103,7 @@ swap(arr, i, j);
 | `dirs8` | 8-directional movement vectors |
 | `UnionFind` | Disjoint set union with path compression and union by rank |
 | `AdjacencyList<T>` | Graph adjacency list with directed/undirected edge support |
+| `topologicalSort(adj)` | Kahn's algorithm - returns sorted order or null if cycle exists |
 
 ### Lodash Re-exports
 

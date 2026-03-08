@@ -48,7 +48,9 @@ export function idxToChar(i: number): string {
 }
 
 export class UnionFind {
+  /** Parent array - each element points to its parent in the set */
   parent: number[];
+  /** Rank array - used for union by rank optimization */
   rank: number[];
 
   constructor(n: number) {
@@ -56,6 +58,7 @@ export class UnionFind {
     this.rank = Array(n).fill(0);
   }
 
+  /** Path compression - makes future lookups O(α(n)) */
   find(x: number): number {
     if (this.parent[x] !== x) {
       this.parent[x] = this.find(this.parent[x]);
@@ -63,6 +66,7 @@ export class UnionFind {
     return this.parent[x];
   }
 
+  /** Union by rank - attach smaller tree under larger tree */
   union(x: number, y: number): void {
     const px = this.find(x);
     const py = this.find(y);
@@ -78,11 +82,13 @@ export class UnionFind {
     }
   }
 
+  /** Check if two elements are in the same set */
   connected(x: number, y: number): boolean {
     return this.find(x) === this.find(y);
   }
 }
 
+/** Graph adjacency list - stores outgoing edges for each node */
 export class AdjacencyList<T = number> {
   private map: DefaultMap<T, T[]>;
 
@@ -90,20 +96,55 @@ export class AdjacencyList<T = number> {
     this.map = new DefaultMap<T, T[]>(() => []);
   }
 
+  /** Add directed edge from -> to */
   addEdge(from: T, to: T): void {
     this.map.get(from).push(to);
   }
 
+  /** Add undirected edge (adds both directions) */
   addUndirectedEdge(a: T, b: T): void {
     this.addEdge(a, b);
     this.addEdge(b, a);
   }
 
+  /** Get all neighbors (outgoing edges) of a node */
   getNeighbors(node: T): T[] {
     return this.map.get(node);
   }
 
+  /** Iterate over all nodes in the graph */
   get nodes(): IterableIterator<T> {
     return this.map.keys();
   }
+}
+
+/**
+ * Kahn's algorithm for topological sorting
+ * @returns Sorted array of nodes, or null if graph has a cycle
+ */
+export function topologicalSort<T>(adj: AdjacencyList<T>): T[] | null {
+  const indegrees = new DefaultMap<T, number>(() => 0);
+  
+  for (const node of adj.nodes) {
+    for (const neighbor of adj.getNeighbors(node)) {
+      indegrees.set(neighbor, indegrees.get(neighbor) + 1);
+    }
+  }
+
+  const queue = new Queue<T>();
+  for (const node of adj.nodes) {
+    if (indegrees.get(node) === 0) queue.enqueue(node);
+  }
+
+  const result: T[] = [];
+  while (queue.size > 0) {
+    const node = queue.dequeue()!;
+    result.push(node);
+    for (const neighbor of adj.getNeighbors(node)) {
+      indegrees.set(neighbor, indegrees.get(neighbor) - 1);
+      if (indegrees.get(neighbor) === 0) queue.enqueue(neighbor);
+    }
+  }
+
+  return result.length === 0 ? null : result;
 }

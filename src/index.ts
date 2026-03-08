@@ -3,6 +3,8 @@ import { Stack, Queue, Heap, MultiMap, BitSet, BloomFilter, MultiSet, Trie, LRUC
 
 export { Stack, Queue, Heap, MultiMap, BitSet, BloomFilter, MultiSet, Trie, LRUCache, DefaultMap };
 
+export { chunk, uniq, flattenDeep, sortBy, range, sum, mean, min, max, fill };
+
 export function swap<T>(arr: T[], i: number, j: number): void {
   [arr[i], arr[j]] = [arr[j], arr[i]];
 }

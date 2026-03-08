@@ -85,13 +85,13 @@ topologicalSort(adj); // ["a", "b", "c"] or similar
 ```ts
 // Next greater element - find next bigger number to the right
 // Input: [2, 1, 2, 4, 3] → Output: [4, 2, 4, -1, -1]
-import { range } from "algo-utils";
+import { rangeRight } from "algo-utils";
 
 const nums = [2, 1, 2, 4, 3];
 const result = Array(nums.length).fill(-1);
 const stack = new MonotonicStack<number>();
 
-for (const i of range(nums.length - 1, -1, -1)) {
+for (const i of rangeRight(nums.length)) {
   stack.popWhile((top) => nums[i] >= top);
   result[i] = stack.peek() ?? -1;
   stack.push(nums[i]);

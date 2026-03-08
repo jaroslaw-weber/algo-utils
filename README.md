@@ -81,6 +81,24 @@ adj.addEdge("b", "c");
 topologicalSort(adj); // ["a", "b", "c"] or similar
 ```
 
+### Monotonic Stack
+```ts
+// Next greater element - find next bigger number to the right
+// Input: [2, 1, 2, 4, 3] → Output: [4, 2, 4, -1, -1]
+import { range } from "algo-utils";
+
+const nums = [2, 1, 2, 4, 3];
+const result = Array(nums.length).fill(-1);
+const stack = new MonotonicStack<number>();
+
+for (const i of range(nums.length - 1, -1, -1)) {
+  stack.popWhile((top) => nums[i] >= top);
+  result[i] = stack.peek() ?? -1;
+  stack.push(nums[i]);
+}
+result; // [4, 2, 4, -1, -1]
+```
+
 ### Swapping array elements
 ```ts
 // Quick in-place swap without temp variable
@@ -104,6 +122,7 @@ swap(arr, i, j);
 | `UnionFind` | Disjoint set union with path compression and union by rank |
 | `AdjacencyList<T>` | Graph adjacency list with directed/undirected edge support |
 | `topologicalSort(adj)` | Kahn's algorithm - returns sorted order or null if cycle exists |
+| `MonotonicStack` | Stack with popWhile for next greater/smaller problems |
 
 ### Lodash Re-exports
 

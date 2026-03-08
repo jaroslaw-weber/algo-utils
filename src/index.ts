@@ -1,9 +1,9 @@
-import _, { chunk, uniq, uniqBy, flatten, flattenDeep, sortBy, reverse, fill, range, cloneDeep, groupBy, countBy, keyBy, partition, pick, omit, merge, get, set, has, zip, unzip, sum, mean, min, max, random } from "lodash";
+import _, { chunk, uniq, uniqBy, flatten, flattenDeep, sortBy, reverse, fill, range, cloneDeep, groupBy, countBy, keyBy, partition, pick, omit, merge, get, set, has, zip, unzip, sum, mean, min, max, random, last } from "lodash";
 import { Stack, Queue, Heap, MultiMap, BitSet, BloomFilter, MultiSet, Trie, LRUCache, DefaultMap } from "mnemonist";
 
 export { Stack, Queue, Heap, MultiMap, BitSet, BloomFilter, MultiSet, Trie, LRUCache, DefaultMap };
 
-export { chunk, uniq, flattenDeep, sortBy, range, sum, mean, min, max, fill };
+export { chunk, uniq, flattenDeep, sortBy, range, sum, mean, min, max, fill, last };
 
 export function swap<T>(arr: T[], i: number, j: number): void {
   [arr[i], arr[j]] = [arr[j], arr[i]];
@@ -147,4 +147,51 @@ export function topologicalSort<T>(adj: AdjacencyList<T>): T[] | null {
   }
 
   return result.length === 0 ? null : result;
+}
+
+/**
+ * Monotonic stack for O(n) solutions to problems like:
+ * - Next Greater/Smaller Element
+ * - Largest Rectangle in Histogram
+ * - Daily Temperatures
+ * - Trapping Rain Water
+ *
+ * Use popWhile to maintain monotonic property before pushing
+ */
+export class MonotonicStack<T = number> {
+  private stack: T[] = [];
+
+  constructor() {}
+
+  /** Push item to stack */
+  push(item: T): void {
+    this.stack.push(item);
+  }
+
+  /** Get top without removing */
+  peek(): T | undefined {
+    return last(this.stack);
+  }
+
+  /** Pop elements while predicate returns true */
+  popWhile(predicate: (item: T) => boolean): void {
+    while (this.stack.length > 0 && predicate(last(this.stack)!)) {
+      this.stack.pop();
+    }
+  }
+
+  /** Remove and return top */
+  pop(): T | undefined {
+    return this.stack.pop();
+  }
+
+  /** Check if empty */
+  get isEmpty(): boolean {
+    return this.stack.length === 0;
+  }
+
+  /** Current size */
+  get size(): number {
+    return this.stack.length;
+  }
 }

@@ -251,8 +251,13 @@ export class MonotonicQueue<T = number> {
 export class Counter {
   private map: DefaultMap<string, number>;
 
-  constructor() {
+  constructor(items?: string[]) {
     this.map = new DefaultMap<string, number>(() => 0);
+    if (items) {
+      for (const item of items) {
+        this.increase(item);
+      }
+    }
   }
 
   /** Get the count for a key (returns 0 if not set) */

@@ -68,7 +68,8 @@ describe("mnemonist reexports", () => {
   describe("Stack", () => {
     it("works", () => {
       const stack = new Stack<number>();
-      stack.push(1).push(2);
+      stack.push(1)
+      stack.push(2)
       expect(stack.pop()).toBe(2);
     });
   });
@@ -76,7 +77,8 @@ describe("mnemonist reexports", () => {
   describe("Queue", () => {
     it("works", () => {
       const queue = new Queue<number>();
-      queue.enqueue(1).enqueue(2);
+      queue.enqueue(1)
+      queue.enqueue(2);
       expect(queue.dequeue()).toBe(1);
     });
   });
@@ -84,7 +86,9 @@ describe("mnemonist reexports", () => {
   describe("Heap", () => {
     it("works", () => {
       const heap = new Heap<number>();
-      heap.push(3).push(1).push(2);
+      heap.push(3)
+      heap.push(1)
+      heap.push(2);
       expect(heap.pop()).toBe(1);
     });
   });

@@ -119,6 +119,18 @@ for (const i of range(nums.length)) {
 result; // [3, 3, 3, 3]
 ```
 
+### Counter
+```ts
+// Count occurrences with ease
+const counter = new Counter();
+counter.increase("apple");     // 1
+counter.increase("apple");     // 2
+counter.increase("banana", 3); // 3
+counter.get("apple");          // 2
+counter.decrease("banana");    // 2
+counter.get("banana");         // 2
+```
+
 ### Swapping array elements
 ```ts
 // Quick in-place swap without temp variable
@@ -144,6 +156,7 @@ swap(arr, i, j);
 | `topologicalSort(adj)` | Kahn's algorithm - returns sorted order or null if cycle exists |
 | `MonotonicStack` | Stack with popWhile for next greater/smaller problems |
 | `MonotonicQueue` | Queue for sliding window maximum/minimum |
+| `Counter` | Counter class with get/set/increase/decrease using DefaultMap |
 
 ### Lodash Re-exports
 

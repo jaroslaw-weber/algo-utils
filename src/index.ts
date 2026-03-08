@@ -243,3 +243,54 @@ export class MonotonicQueue<T = number> {
     return this.deque.length;
   }
 }
+
+/**
+ * Counter class for counting occurrences of items
+ * Internally uses DefaultMap with default value 0
+ */
+export class Counter {
+  private map: DefaultMap<string, number>;
+
+  constructor() {
+    this.map = new DefaultMap<string, number>(() => 0);
+  }
+
+  /** Get the count for a key (returns 0 if not set) */
+  get(key: string): number {
+    return this.map.get(key);
+  }
+
+  /** Set the count for a key */
+  set(key: string, value: number): void {
+    this.map.set(key, value);
+  }
+
+  /** Increase the count for a key by amount (default 1) */
+  increase(key: string, amount: number = 1): number {
+    const newValue = this.map.get(key) + amount;
+    this.map.set(key, newValue);
+    return newValue;
+  }
+
+  /** Decrease the count for a key by amount (default 1) */
+  decrease(key: string, amount: number = 1): number {
+    const newValue = this.map.get(key) - amount;
+    this.map.set(key, newValue);
+    return newValue;
+  }
+
+  /** Get all entries */
+  entries(): IterableIterator<[string, number]> {
+    return this.map.entries();
+  }
+
+  /** Get all keys */
+  keys(): IterableIterator<string> {
+    return this.map.keys();
+  }
+
+  /** Check if key exists */
+  has(key: string): boolean {
+    return this.map.has(key);
+  }
+}

@@ -174,10 +174,18 @@ getListLength(head); // 3
 getTail(head).val;   // 3
 getNodeAt(head, 2);  // ListNode { val: 2, next: ... }
 
+// Fast/slow pointer for middle node
+const mid = getMid(head);  // ListNode { val: 2, ... }
+
+// Reverse in-place, returns new head
+const reversed = reverseList(head);  // 3 -> 2 -> 1
+
 // Useful for problems like:
-// - Middle of the Linked List
-// - Linked List Cycle II
-// - Remove Nth Node From End of List
+// - Middle of the Linked List (LC 876)
+// - Reverse Linked List (LC 206)
+// - Palindrome Linked List (LC 234)
+// - Linked List Cycle II (LC 142)
+// - Remove Nth Node From End of List (LC 19)
 ```
 
 ## API
@@ -207,6 +215,8 @@ getNodeAt(head, 2);  // ListNode { val: 2, next: ... }
 | `getListLength(head)` | Get the length of a linked list |
 | `getTail(head)` | Get the tail (last node) of a linked list |
 | `getNodeAt(head, steps)` | Get node at position (1-indexed) from head |
+| `getMid(head)` | Get middle node using fast/slow pointer |
+| `reverseList(head)` | Reverse linked list in-place, returns new head |
 
 ### Lodash Re-exports
 
